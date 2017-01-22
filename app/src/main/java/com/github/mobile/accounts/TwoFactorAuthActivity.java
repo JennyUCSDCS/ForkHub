@@ -1,4 +1,5 @@
 /*
+
  * Copyright 2013 GitHub Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -227,7 +228,9 @@ public class TwoFactorAuthActivity extends RoboActionBarActivity {
 
                 configureSyncFor(account);
                 try {
-                    new LoginActivity.AccountLoader(TwoFactorAuthActivity.this).call();
+                    //new SRP
+                    new AccountLoader(TwoFactorAuthActivity.this).call();
+                    //new LoginActivity.AccountLoader(TwoFactorAuthActivity.this).call();
                 } catch (IOException e) {
                     Log.d(TAG, "Exception loading organizations", e);
                 }

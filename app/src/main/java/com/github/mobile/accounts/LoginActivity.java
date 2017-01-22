@@ -114,7 +114,8 @@ public class LoginActivity extends RoboActionBarAccountAuthenticatorActivity {
         ContentResolver.addPeriodicSync(account, PROVIDER_AUTHORITY,
                 new Bundle(), SYNC_PERIOD);
     }
-
+//SRP? change it to an independent class
+    /*
     public static class AccountLoader extends
             AuthenticatedUserTask<List<User>> {
 
@@ -130,7 +131,7 @@ public class LoginActivity extends RoboActionBarAccountAuthenticatorActivity {
             return cache.getOrgs(true);
         }
     }
-
+*/
     private AccountManager accountManager;
 
     private AutoCompleteTextView loginText;
@@ -184,9 +185,7 @@ public class LoginActivity extends RoboActionBarAccountAuthenticatorActivity {
         signupText.setText(Html.fromHtml(getString(R.string.signup_link)));
 
         if (!TextUtils.isEmpty(username)) {
-            loginText.setText(username);
-            loginText.setEnabled(false);
-            loginText.setFocusable(false);
+           LoginTextManipulation(username);
         }
 
         TextWatcher watcher = new TextWatcherAdapter() {
@@ -246,6 +245,14 @@ public class LoginActivity extends RoboActionBarAccountAuthenticatorActivity {
         loginText.setAdapter(new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line,
                 getEmailAddresses()));
+    }
+
+    //loginText manipulation complex calling sequences in case of too much information
+
+    private void LoginTextManipulation (String username){
+        loginText.setText(username);
+        loginText.setEnabled(false);
+        loginText.setFocusable(false);
     }
 
     @Override
