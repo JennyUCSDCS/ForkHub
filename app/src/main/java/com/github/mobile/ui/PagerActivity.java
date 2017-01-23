@@ -34,15 +34,31 @@ public abstract class PagerActivity extends DialogFragmentActivity implements
      *
      * @return fragment provider
      */
+
+
+
+    //getProvider() is extended by 5 classes, and each override of it is the same, it violate DRY, we can make it abstract and it can be used
+
+
+/*
     protected abstract FragmentProvider getProvider();
+
+*/
+
+    protected  FragmentProvider getProvider(FragmentStatePagerAdapter adapter){
+        return adapter;
+    }
 
     /**
      * Get selected fragment
      *
      * @return fragment
      */
+
+    //get parameter of getProvider changed
+    protected FragmentStatePagerAdapter adapter;
     protected Fragment getFragment() {
-        FragmentProvider provider = getProvider();
+        FragmentProvider provider = getProvider(adapter);
         if (provider != null)
             return provider.getSelected();
         else

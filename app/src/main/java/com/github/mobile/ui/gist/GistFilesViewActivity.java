@@ -160,9 +160,12 @@ public class GistFilesViewActivity extends PagerActivity {
             return super.onOptionsItemSelected(item);
         }
     }
+    // the implementation betweens subclasses are identical, violate DRY
 
+    //in the tabPagerActivity
     @Override
     protected FragmentProvider getProvider() {
         return adapter;
     }
+
 }

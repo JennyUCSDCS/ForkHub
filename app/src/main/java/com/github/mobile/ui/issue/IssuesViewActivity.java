@@ -332,10 +332,16 @@ public class IssuesViewActivity extends PagerActivity {
         startActivity(intent, false);
     }
 
+    // the implementation betweens subclasses are identical, violate DRY
+
+    // in the IssueViewActivity
+
+    /*
     @Override
     protected FragmentProvider getProvider() {
         return adapter;
     }
+    */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

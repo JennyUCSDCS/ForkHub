@@ -97,7 +97,7 @@ public abstract class DialogFragmentActivity extends
      * @param name
      * @return string array
      */
-    protected String[] getStringArrayExtra(final String name) {
+    protected String[]getStringArrayExtra(final String name) {
         return getIntent().getStringArrayExtra(name);
     }
 
