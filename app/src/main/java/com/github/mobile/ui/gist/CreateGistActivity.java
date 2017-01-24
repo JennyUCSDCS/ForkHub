@@ -29,7 +29,7 @@ import android.widget.EditText;
 
 import com.github.mobile.R;
 import com.github.mobile.core.gist.CreateGistTask;
-import com.github.mobile.ui.BaseActivity;
+import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.TextWatcherAdapter;
 import com.github.mobile.util.ShareUtils;
 
@@ -38,7 +38,7 @@ import org.eclipse.egit.github.core.Gist;
 /**
  * Activity to share a text selection as a public or private Gist
  */
-public class CreateGistActivity extends BaseActivity {
+public class CreateGistActivity extends DialogFragmentActivity {
 
     private EditText descriptionText;
 

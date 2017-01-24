@@ -38,7 +38,7 @@ import com.github.mobile.Intents.Builder;
 import com.github.mobile.R;
 import com.github.mobile.core.code.RefreshBlobTask;
 import com.github.mobile.core.commit.CommitUtils;
-import com.github.mobile.ui.BaseActivity;
+import com.github.mobile.ui.DialogFragmentActivity;
 import com.github.mobile.ui.MarkdownLoader;
 import com.github.mobile.util.AvatarLoader;
 import com.github.mobile.util.HttpImageGetter;
@@ -57,7 +57,7 @@ import org.eclipse.egit.github.core.util.EncodingUtils;
 /**
  * Activity to display the contents of a file in a commit
  */
-public class CommitFileViewActivity extends BaseActivity implements
+public class CommitFileViewActivity extends DialogFragmentActivity implements
         LoaderCallbacks<CharSequence> {
 
     private static final String TAG = "CommitFileViewActivity";

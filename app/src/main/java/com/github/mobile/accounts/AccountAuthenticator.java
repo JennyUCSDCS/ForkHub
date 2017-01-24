@@ -67,15 +67,12 @@ class AccountAuthenticator extends AbstractAccountAuthenticator {
      */
     @Override
     public Bundle addAccount(final AccountAuthenticatorResponse response,
-            final String accountType, final String authTokenType,
-            final String[] requiredFeatures, final Bundle options)
+                             final String accountType, final String authTokenType,
+                             final String[] requiredFeatures, final Bundle options)
             throws NetworkErrorException {
-        //Repeat
-        //final Intent intent = new Intent(context, LoginActivity.class);
-        //intent.putExtra(PARAM_AUTHTOKEN_TYPE, authTokenType);
-        //intent.putExtra(KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-        //Repeat
-        final Intent intent = createIntent(response, authTokenType);
+        final Intent intent = new Intent(context, LoginActivity.class);
+        intent.putExtra(PARAM_AUTHTOKEN_TYPE, authTokenType);
+        intent.putExtra(KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
         final Bundle bundle = new Bundle();
         bundle.putParcelable(KEY_INTENT, intent);
         return bundle;
@@ -90,12 +87,12 @@ class AccountAuthenticator extends AbstractAccountAuthenticator {
 
     @Override
     public Bundle editProperties(final AccountAuthenticatorResponse response,
-            final String accountType) {
+                                 final String accountType) {
         return null;
     }
 
     private static boolean isValidAuthorization(final Authorization auth,
-            final List<String> requiredScopes) {
+                                                final List<String> requiredScopes) {
         if (auth == null)
             return false;
 
@@ -105,12 +102,9 @@ class AccountAuthenticator extends AbstractAccountAuthenticator {
     //DRY?
     private Intent createLoginIntent(final AccountAuthenticatorResponse response) {
 
-        final Intent intent = createIntent(response, ACCOUNT_TYPE);
-        //repeat
-        //final Intent intent = new Intent(context, LoginActivity.class);
-        //intent.putExtra(PARAM_AUTHTOKEN_TYPE, ACCOUNT_TYPE);
-        //intent.putExtra(KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-        //repeat
+        final Intent intent = new Intent(context, LoginActivity.class);
+        intent.putExtra(PARAM_AUTHTOKEN_TYPE, ACCOUNT_TYPE);
+        intent.putExtra(KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
         return intent;
     }
     //Add for DRY
@@ -154,8 +148,8 @@ class AccountAuthenticator extends AbstractAccountAuthenticator {
 
     @Override
     public Bundle getAuthToken(final AccountAuthenticatorResponse response,
-            final Account account, final String authTokenType,
-            final Bundle options) throws NetworkErrorException {
+                               final Account account, final String authTokenType,
+                               final Bundle options) throws NetworkErrorException {
         Log.d(TAG, "Retrieving OAuth2 token");
 
         final Bundle bundle = new Bundle();
@@ -205,7 +199,7 @@ class AccountAuthenticator extends AbstractAccountAuthenticator {
 
     @Override
     public Bundle hasFeatures(final AccountAuthenticatorResponse response,
-            final Account account, final String[] features)
+                              final Account account, final String[] features)
             throws NetworkErrorException {
         final Bundle result = new Bundle();
         result.putBoolean(KEY_BOOLEAN_RESULT, false);
@@ -216,12 +210,11 @@ class AccountAuthenticator extends AbstractAccountAuthenticator {
     public Bundle updateCredentials(
             final AccountAuthenticatorResponse response, final Account account,
             final String authTokenType, final Bundle options) {
-        //repeat
-        //final Intent intent = new Intent(context, LoginActivity.class);
-        //intent.putExtra(PARAM_AUTHTOKEN_TYPE, authTokenType);
-        //intent.putExtra(KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-        //repeat
-        final Intent intent = createIntent(response, authTokenType);
+
+        final Intent intent = new Intent(context, LoginActivity.class);
+        intent.putExtra(PARAM_AUTHTOKEN_TYPE, authTokenType);
+        intent.putExtra(KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+
         if (!TextUtils.isEmpty(account.name))
             intent.putExtra(PARAM_USERNAME, account.name);
         final Bundle bundle = new Bundle();
