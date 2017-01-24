@@ -18,15 +18,13 @@ package com.github.mobile.ui;
 import android.os.Bundle;
 
 import com.github.kevinsawicki.wishlist.ViewFinder;
-import com.github.mobile.ui.roboactivities.RoboActionBarActivity;
-
+import com.github.mobile.ui.BaseActivity;
 import java.io.Serializable;
 
 /**
  * Activity that display dialogs
  */
-public abstract class DialogFragmentActivity extends
-    RoboActionBarActivity implements DialogResultListener {
+public abstract class DialogFragmentActivity extends BaseActivity implements DialogResultListener {
 
     /**
      * Finder bound to this activity's view
