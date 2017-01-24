@@ -11,6 +11,7 @@ import android.view.View;
 import com.github.mobile.R;
 import com.google.inject.Key;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +50,7 @@ public class RoboActionBarActivity extends AppCompatActivity implements RoboCont
         super.onCreate( savedInstanceState );
         eventManager.fire( new OnCreateEvent( savedInstanceState ) );
     }
+
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {

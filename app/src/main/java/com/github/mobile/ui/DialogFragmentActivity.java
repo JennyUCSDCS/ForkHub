@@ -18,15 +18,13 @@ package com.github.mobile.ui;
 import android.os.Bundle;
 
 import com.github.kevinsawicki.wishlist.ViewFinder;
-import com.github.mobile.ui.roboactivities.RoboActionBarActivity;
-
+import com.github.mobile.ui.BaseActivity;
 import java.io.Serializable;
 
 /**
  * Activity that display dialogs
  */
-public abstract class DialogFragmentActivity extends
-    RoboActionBarActivity implements DialogResultListener {
+public abstract class DialogFragmentActivity extends BaseActivity implements DialogResultListener {
 
     /**
      * Finder bound to this activity's view
@@ -40,26 +38,7 @@ public abstract class DialogFragmentActivity extends
         finder = new ViewFinder(this);
     }
 
-    /**
-     * Get intent extra
-     *
-     * @param name
-     * @return serializable
-     */
-    @SuppressWarnings("unchecked")
-    protected <V extends Serializable> V getSerializableExtra(final String name) {
-        return (V) getIntent().getSerializableExtra(name);
-    }
 
-    /**
-     * Get intent extra
-     *
-     * @param name
-     * @return int
-     */
-    protected int getIntExtra(final String name) {
-        return getIntent().getIntExtra(name, -1);
-    }
 
     /**
      * Get intent extra
@@ -80,6 +59,7 @@ public abstract class DialogFragmentActivity extends
     protected boolean[] getBooleanArrayExtra(final String name) {
         return getIntent().getBooleanArrayExtra(name);
     }
+
 
     /**
      * Get intent extra
