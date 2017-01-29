@@ -57,7 +57,7 @@ import org.eclipse.egit.github.core.service.CollaboratorService;
 /**
  * Activity to display a collection of issues or pull requests in a pager
  */
-public class IssuesViewActivity extends PagerActivity {
+public  class IssuesViewActivity extends PagerActivity {
 
     private static final String EXTRA_PULL_REQUESTS = "pullRequests";
 
@@ -336,12 +336,12 @@ public class IssuesViewActivity extends PagerActivity {
 
     // in the IssueViewActivity
 
-    /*
+
     @Override
     protected FragmentProvider getProvider() {
         return adapter;
     }
-    */
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

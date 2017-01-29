@@ -295,6 +295,7 @@ public class LoginActivity extends RoboActionBarAccountAuthenticatorActivity {
     /**
      * Authenticate login & password
      */
+    /*
     public void handleLogin() {
         if (requestNewAccount)
             username = loginText.getText().toString();
@@ -344,6 +345,86 @@ public class LoginActivity extends RoboActionBarAccountAuthenticatorActivity {
                 } else
                     accountManager.setPassword(account, password);
 
+                return user;
+            }
+
+            @Override
+            protected void onException(Exception e) throws RuntimeException {
+                dialog.dismiss();
+
+                Log.d(TAG, "Exception requesting authenticated user", e);
+                handleLoginException(e);
+            }
+
+            @Override
+            public void onSuccess(User user) {
+                dialog.dismiss();
+
+                if (user != null)
+                    onAuthenticationResult(true);
+            }
+        };
+        authenticationTask.execute();
+    }
+    */
+    /*
+        in this method, it has both command and query, it need to query the database to ensure whet
+     */
+    public void handleLogin() {
+        if (requestNewAccount)
+            username = loginText.getText().toString();
+        password = passwordText.getText().toString();
+
+        final AlertDialog dialog = LightProgressDialog.create(this,
+                R.string.login_activity_authenticating);
+        dialog.setCancelable(true);
+        dialog.setOnCancelListener(new OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                if (authenticationTask != null)
+                    authenticationTask.cancel(true);
+            }
+        });
+        dialog.show();
+
+        authenticationTask = new RoboAsyncTask<User>(this) {
+
+            @Override
+            public User call() throws Exception {
+                GitHubClient client = new TwoFactorAuthClient();
+                client.setCredentials(username, password);
+
+                User user;
+                try {
+                    user = new UserService(client).getUser();
+                } catch (TwoFactorAuthException e) {
+                    if (e.twoFactorAuthType == TWO_FACTOR_AUTH_TYPE_SMS)
+                        sendSmsOtpCode(new OAuthService(client));
+                    openTwoFactorAuthActivity();
+
+                    return null;
+                }
+
+                Account account = new Account(user.getLogin(), ACCOUNT_TYPE);
+                //use precondition to require users to input corrrect username and password.
+                /*
+                    handle_Login
+                    require
+                        username :
+                            not null and exists in database
+                        password:
+                            not null and corresponding to username input
+                 */
+                //use precondition, we can make sure the correctness of input
+                    accountManager
+                            .addAccountExplicitly(account, password, null);
+                    configureSyncFor(account);
+                    try {
+                        new AccountLoader(LoginActivity.this).call();
+                    } catch (IOException e) {
+                        Log.d(TAG, "Exception loading organizations", e);
+                    }
                 return user;
             }
 
