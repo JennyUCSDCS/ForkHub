@@ -177,15 +177,12 @@ public class GistsViewActivity extends PagerActivity implements
             super.startActivity(intent);
     }
 
-    // the implementation betweens subclasses are identical, violate DRY
 
-    //in the gistViewActivity
-    /*
     @Override
     protected FragmentProvider getProvider() {
         return adapter;
     }
-    */
+
     private void updateActionBar(Gist gist, String gistId) {
         ActionBar actionBar = getSupportActionBar();
         if (gist == null) {

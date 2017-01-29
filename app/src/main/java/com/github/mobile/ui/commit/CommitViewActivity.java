@@ -148,11 +148,10 @@ public class CommitViewActivity extends PagerActivity {
         final String id = CommitUtils.abbreviate(ids[position].toString());
         getSupportActionBar().setTitle(getString(R.string.commit_prefix) + id);
     }
-// the implementation betweens subclasses are identical, violate DRY
-    /*
+
     @Override
     protected FragmentProvider getProvider() {
         return adapter;
     }
-    */
+
 }

@@ -149,11 +149,10 @@ public abstract class TabPagerActivity<V extends PagerAdapter & FragmentProvider
         pager.addOnPageChangeListener(this);
         tabLayout = (TabLayout) findViewById(R.id.th_tabs);
     }
-// the implementation betweens subclasses are identical, violate DRY
-    /*
+
     @Override
     protected FragmentProvider getProvider() {
         return adapter;
     }
-    */
+
 }

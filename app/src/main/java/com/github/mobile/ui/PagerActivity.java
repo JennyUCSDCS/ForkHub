@@ -45,9 +45,7 @@ public abstract class PagerActivity extends DialogFragmentActivity implements
 
 */
 
-    protected  FragmentProvider getProvider(FragmentStatePagerAdapter adapter){
-        return adapter;
-    }
+    protected  abstract FragmentProvider getProvider();
 
     /**
      * Get selected fragment
@@ -56,9 +54,9 @@ public abstract class PagerActivity extends DialogFragmentActivity implements
      */
 
     //get parameter of getProvider changed
-    protected FragmentStatePagerAdapter adapter;
+
     protected Fragment getFragment() {
-        FragmentProvider provider = getProvider(adapter);
+        FragmentProvider provider = getProvider();
         if (provider != null)
             return provider.getSelected();
         else
