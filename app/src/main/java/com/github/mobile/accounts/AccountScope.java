@@ -91,7 +91,7 @@ public class AccountScope extends ScopeBase {
 
         currentAccount.remove();
     }
-
+    /* comment on 1/29/2017 separate the command and query
     @Override
     protected <T> Map<Key<?>, Object> getScopedObjectMap(final Key<T> key) {
         GitHubAccount account = currentAccount.get();
@@ -105,6 +105,34 @@ public class AccountScope extends ScopeBase {
             scopeMap.put(GITHUB_ACCOUNT_KEY, account);
             repoScopeMaps.put(account, scopeMap);
         }
+        return scopeMap;
+    }*/
+
+    protected void updateScopedObjectMap(final Key<?> key) {
+        GitHubAccount account = currentAccount.get();
+        if (account == null)
+            throw new OutOfScopeException("Cannot access " + key
+                    + " outside of a scoping block");
+
+        Map<Key<?>, Object> scopeMap = repoScopeMaps.get(account);
+        if (scopeMap == null) {
+            scopeMap = new ConcurrentHashMap<Key<?>, Object>();
+            scopeMap.put(GITHUB_ACCOUNT_KEY, account);
+            repoScopeMaps.put(account, scopeMap);
+        }
+    }
+    /**
+     * require
+     *           currentAccount will not be null
+     *           repoScopeMaps will not be null
+     * ensure    account will not be null
+     *           scopeMap will not be null
+     */
+    @Override
+    protected <T> Map<Key<?>, Object> getScopedObjectMap(final Key<T> key) {
+        updateScopedObjectMap(key);
+        GitHubAccount account = currentAccount.get();
+        Map<Key<?>, Object> scopeMap = repoScopeMaps.get(account);
         return scopeMap;
     }
 }
