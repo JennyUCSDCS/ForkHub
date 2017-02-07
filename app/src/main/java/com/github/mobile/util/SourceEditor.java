@@ -64,27 +64,8 @@ public class SourceEditor implements Editor {
     }
 
     public SourceEditor(final WebView view) {
-        WebViewClient client = new WebViewClient() {
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (URL_PAGE.equals(url)) {
-                    view.loadUrl(url);
-                    return false;
-                } else {
-                    UriLauncherActivity.launchUri(view.getContext(), Uri.parse(url));
-                    return true;
-                }
-            }
-        };
-        view.setWebViewClient(client);
-
-        WebSettings settings = view.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setBuiltInZoomControls(true);
-        view.addJavascriptInterface(this, "SourceEditor");
-
-        this.view = view;
+        setCodeView(view);
+        init();
     }
 
     public void init() {
@@ -107,7 +88,6 @@ public class SourceEditor implements Editor {
         settings.setJavaScriptEnabled(true);
         settings.setBuiltInZoomControls(true);
         view.addJavascriptInterface(this, "SourceEditor");
-        this.view = view;
     }
 
     /**
