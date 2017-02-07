@@ -130,6 +130,7 @@ public class CommitFileViewActivity extends BaseActivity implements
         isMarkdownFile = MarkdownUtils.isMarkdown(file);
 
         editor = new SourceEditor(codeView);
+//        editor.setCodeView(codeView);
         editor.setWrap(PreferenceUtils.getCodePreferences(this).getBoolean(
                 WRAP, false));
 

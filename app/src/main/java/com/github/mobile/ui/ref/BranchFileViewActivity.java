@@ -19,6 +19,7 @@ import static com.github.mobile.Intents.EXTRA_BASE;
 import static com.github.mobile.Intents.EXTRA_HEAD;
 import static com.github.mobile.Intents.EXTRA_PATH;
 import static com.github.mobile.Intents.EXTRA_REPOSITORY;
+import static com.github.mobile.Intents.EXTRA_EDITOR;
 import static com.github.mobile.util.PreferenceUtils.RENDER_MARKDOWN;
 import static com.github.mobile.util.PreferenceUtils.WRAP;
 import android.content.Intent;
@@ -46,6 +47,7 @@ import com.github.mobile.util.MarkdownUtils;
 import com.github.mobile.util.PreferenceUtils;
 import com.github.mobile.util.ShareUtils;
 import com.github.mobile.util.SourceEditor;
+import com.github.mobile.util.Editor;
 import com.github.mobile.util.ToastUtils;
 import com.google.inject.Inject;
 
@@ -70,12 +72,15 @@ public class BranchFileViewActivity extends BaseActivity implements
      * @param branch
      * @param file
      * @param blobSha
+     * @param editor
      * @return intent
      */
+
     public static Intent createIntent(Repository repository, String branch,
-            String file, String blobSha) {
+            String file, String blobSha, Editor editor) {
         Builder builder = new Builder("branch.file.VIEW");
         builder.repo(repository);
+        builder.editor(editor);
         builder.add(EXTRA_BASE, blobSha);
         builder.add(EXTRA_PATH, file);
         builder.add(EXTRA_HEAD, branch);
@@ -102,7 +107,9 @@ public class BranchFileViewActivity extends BaseActivity implements
 
     private WebView codeView;
 
-    private SourceEditor editor;
+//  private SourceEditor editor;
+
+    private Editor editor;
 
     private MenuItem markdownItem;
 
@@ -119,6 +126,7 @@ public class BranchFileViewActivity extends BaseActivity implements
         setContentView(R.layout.commit_file_view);
 
         repo = getSerializableExtra(EXTRA_REPOSITORY);
+        editor = getSerializableExtra(EXTRA_EDITOR);
         sha = getStringExtra(EXTRA_BASE);
         path = getStringExtra(EXTRA_PATH);
         branch = getStringExtra(EXTRA_HEAD);
@@ -128,7 +136,8 @@ public class BranchFileViewActivity extends BaseActivity implements
 
         file = CommitUtils.getName(path);
         isMarkdownFile = MarkdownUtils.isMarkdown(file);
-        editor = new SourceEditor(codeView);
+//        editor = new SourceEditor(codeView);
+        editor.setCodeView(codeView);
         editor.setWrap(PreferenceUtils.getCodePreferences(this).getBoolean(
                 WRAP, false));
 

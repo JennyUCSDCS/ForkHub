@@ -29,6 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -59,6 +60,9 @@ import java.util.LinkedList;
 import org.eclipse.egit.github.core.Reference;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.service.DataService;
+import android.content.Intent;
+import com.github.mobile.util.Editor;
+import com.github.mobile.util.SourceEditor;
 
 /**
  * Fragment to display a repository's source code tree
@@ -89,6 +93,12 @@ public class RepositoryCodeFragment extends DialogFragment implements
     private Folder folder;
 
     private Repository repository;
+
+    private Editor editor;
+
+   // private WebView codeView = finder.find(R.id.wv_code);
+
+    //private Editor editor = new SourceEditor(codeView);
 
     @Inject
     private DataService service;
@@ -316,8 +326,15 @@ public class RepositoryCodeFragment extends DialogFragment implements
 
         if (entry instanceof Folder)
             setFolder(tree, (Folder) entry);
-        else
+        else {
+            editor = new SourceEditor();
             startActivity(BranchFileViewActivity.createIntent(repository,
-                    tree.branch, entry.entry.getPath(), entry.entry.getSha()));
+                    tree.branch, entry.entry.getPath(), entry.entry.getSha(), editor));
+            editor.init();
+            //this is a Fragment need to find its Activity , so need use getActvitiy()
+            //Intent intent = new Intent(this.getActivity(), BranchFileViewActivity.class);
+            //intent.putExtra(repository, message);
+        }
     }
+
 }

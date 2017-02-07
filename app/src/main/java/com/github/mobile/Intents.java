@@ -28,6 +28,7 @@ import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryId;
 import org.eclipse.egit.github.core.Team;
 import org.eclipse.egit.github.core.User;
+import com.github.mobile.util.Editor;
 
 /**
  * Helper for creating intents
@@ -49,6 +50,12 @@ public class Intents {
      */
     public static final String EXTRA_REPOSITORY = INTENT_EXTRA_PREFIX
             + "REPOSITORY";
+
+    /**
+     * Edior handle
+     */
+    public static final String EXTRA_EDITOR = INTENT_EXTRA_PREFIX
+            + "EDITOR";
 
     /**
      * Repository ids collection handle
@@ -225,6 +232,16 @@ public class Intents {
          */
         public Builder repo(Repository repository) {
             return add(EXTRA_REPOSITORY, repository);
+        }
+
+        /**
+         * Add repository to intent being built up
+         *
+         * @param editor
+         * @return this builder
+         */
+        public Builder editor(Editor editor) {
+            return add(EXTRA_EDITOR, editor);
         }
 
         /**

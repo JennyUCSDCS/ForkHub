@@ -34,11 +34,11 @@ import org.eclipse.egit.github.core.util.EncodingUtils;
 /**
  * Utilities for displaying source code in a {@link WebView}
  */
-public class SourceEditor {
+public class SourceEditor implements Editor {
 
     private static final String URL_PAGE = "file:///android_asset/source-editor.html";
 
-    private final WebView view;
+    private WebView view;
 
     private boolean wrap;
 
@@ -53,8 +53,16 @@ public class SourceEditor {
     /**
      * Create source editor using given web view
      *
-     * @param view
+     * @param ()
      */
+    public SourceEditor() {
+
+    }
+
+    public void setCodeView(final WebView codeView) {
+        view = codeView;
+    }
+
     public SourceEditor(final WebView view) {
         WebViewClient client = new WebViewClient() {
 
@@ -76,6 +84,29 @@ public class SourceEditor {
         settings.setBuiltInZoomControls(true);
         view.addJavascriptInterface(this, "SourceEditor");
 
+        this.view = view;
+    }
+
+    public void init() {
+        WebViewClient client = new WebViewClient() {
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (URL_PAGE.equals(url)) {
+                    view.loadUrl(url);
+                    return false;
+                } else {
+                    UriLauncherActivity.launchUri(view.getContext(), Uri.parse(url));
+                    return true;
+                }
+            }
+        };
+        view.setWebViewClient(client);
+
+        WebSettings settings = view.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setBuiltInZoomControls(true);
+        view.addJavascriptInterface(this, "SourceEditor");
         this.view = view;
     }
 
@@ -205,4 +236,5 @@ public class SourceEditor {
     public SourceEditor toggleMarkdown() {
         return setMarkdown(!markdown);
     }
+
 }
