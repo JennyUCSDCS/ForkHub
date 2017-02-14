@@ -41,7 +41,7 @@ import org.eclipse.egit.github.core.IRepositoryIdProvider;
  * Fragment to display rendered comment fragment
  */
 public class RenderedCommentFragment extends DialogFragment implements
-        LoaderCallbacks<CharSequence> {
+        LoaderCallbacks<CharSequence>,CommentType  {
 
     private static final String ARG_TEXT = "text";
 
@@ -76,6 +76,10 @@ public class RenderedCommentFragment extends DialogFragment implements
         getLoaderManager().restartLoader(0, args, this);
         Keyboard.hideSoftInput(bodyText);
         showLoading(true);
+    }
+    public void setText(String s)
+    {
+        ;
     }
 
     private void showLoading(final boolean loading) {
