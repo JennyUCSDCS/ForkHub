@@ -31,6 +31,7 @@ import com.github.mobile.Intents.Builder;
 import com.github.mobile.R;
 import com.github.mobile.accounts.AccountUtils;
 import com.github.mobile.accounts.AuthenticatedUserTask;
+import com.github.mobile.core.issue.InstoreIssue;
 import com.github.mobile.core.issue.IssueStore;
 import com.github.mobile.core.issue.IssueUtils;
 import com.github.mobile.core.repo.RefreshRepositoryTask;
@@ -291,7 +292,7 @@ public  class IssuesViewActivity extends PagerActivity {
         if (repoId != null) {
             updateTitle(position);
             actionBar.setSubtitle(repoId.generateId());
-            RepositoryIssue issue = store.getIssue(repoId,
+            InstoreIssue issue = store.getIssue(repoId,
                     issueNumbers[position]);
             if (issue != null) {
                 Repository fullRepo = issue.getRepository();
@@ -352,7 +353,7 @@ public  class IssuesViewActivity extends PagerActivity {
                 int position = pager.getCurrentItem();
                 RepositoryId repoId = repoIds.get(position);
                 if (repoId != null) {
-                    RepositoryIssue issue = store.getIssue(repoId,
+                    InstoreIssue issue = store.getIssue(repoId,
                             issueNumbers[position]);
                     if (issue != null)
                         repository = issue.getRepository();

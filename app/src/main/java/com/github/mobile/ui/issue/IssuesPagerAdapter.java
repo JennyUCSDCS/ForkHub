@@ -26,6 +26,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.SparseArray;
 import android.view.ViewGroup;
 
+import com.github.mobile.core.issue.InstoreIssue;
 import com.github.mobile.core.issue.IssueStore;
 import com.github.mobile.ui.FragmentStatePagerAdapter;
 
@@ -103,7 +104,7 @@ public class IssuesPagerAdapter extends FragmentStatePagerAdapter {
             RepositoryId repo = repos.get(position);
             args.putString(EXTRA_REPOSITORY_NAME, repo.getName());
             args.putString(EXTRA_REPOSITORY_OWNER, repo.getOwner());
-            RepositoryIssue issue = store.getIssue(repo, issues[position]);
+            InstoreIssue issue = store.getIssue(repo, issues[position]);
             if (issue != null && issue.getUser() != null) {
                 Repository fullRepo = issue.getRepository();
                 if (fullRepo != null && fullRepo.getOwner() != null)
