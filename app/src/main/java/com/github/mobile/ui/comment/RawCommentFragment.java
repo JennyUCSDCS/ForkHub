@@ -31,10 +31,9 @@ import com.github.mobile.ui.TextWatcherAdapter;
 /**
  * Fragment to display raw comment text
  */
-public class RawCommentFragment extends DialogFragment {
+public class RawCommentFragment extends DialogFragment implements CommentType {
 
     private EditText commentText;
-
     /**
      * Text to populate comment window.
      */

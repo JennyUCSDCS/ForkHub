@@ -16,6 +16,7 @@
 package com.github.mobile.ui.comment;
 
 import android.content.res.Resources;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
@@ -42,6 +43,8 @@ public class CommentPreviewPagerAdapter extends FragmentPagerAdapter {
      */
     private String initComment;
 
+    CommentType commentType;
+
     /**
      * @param activity
      * @param repo
@@ -56,13 +59,15 @@ public class CommentPreviewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(final int position) {
+        CommentTypeFactory commentTypeFactory = new CommentTypeFactory();
+        commentType = commentTypeFactory.getCommentType(position);
         switch (position) {
         case 0:
-            textFragment = new RawCommentFragment();
+            textFragment = (RawCommentFragment)commentType;
             textFragment.setText(initComment);
             return textFragment;
         case 1:
-            htmlFragment = new RenderedCommentFragment();
+            htmlFragment = (RenderedCommentFragment)commentType;
             return htmlFragment;
         default:
             return null;
