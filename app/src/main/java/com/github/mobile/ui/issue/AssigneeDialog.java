@@ -93,7 +93,6 @@ public class AssigneeDialog {
             @Override
             protected void onException(Exception e) throws RuntimeException {
                 super.onException(e);
-
                 //Log.d(TAG, "Exception loading collaborators", e);
                 ToastUtils.show(activity, e, R.string.error_collaborators_load);
             }

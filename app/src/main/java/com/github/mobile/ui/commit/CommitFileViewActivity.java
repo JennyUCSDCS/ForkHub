@@ -290,7 +290,6 @@ public class CommitFileViewActivity extends BaseActivity implements
             @Override
             protected void onException(Exception e) throws RuntimeException {
                 super.onException(e);
-
                 //Log.d(TAG, "Loading commit file contents failed", e);
 
                 ViewUtils.setGone(loadingBar, true);
