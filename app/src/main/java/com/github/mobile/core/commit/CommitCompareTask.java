@@ -21,6 +21,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.github.mobile.accounts.AuthenticatedUserTask;
+import com.github.mobile.aspectj.DebugTrace;
 import com.google.inject.Inject;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
@@ -70,11 +71,12 @@ public class CommitCompareTask extends
         }
         return commitService.compare(repository, base, head);
     }
-
+    //Add JoinPoint
+    @DebugTrace
     @Override
     protected void onException(Exception e) throws RuntimeException {
         super.onException(e);
 
-        Log.d(TAG, "Exception loading commit compare", e);
+        //Log.d(TAG, "Exception loading commit compare", e);
     }
 }
