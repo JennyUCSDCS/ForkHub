@@ -16,6 +16,7 @@
 package com.github.mobile.ui.comment;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
@@ -90,5 +91,9 @@ public class RawCommentFragment extends DialogFragment implements CommentType {
         } else {
             initComment = comment;
         }
+    }
+    //add method by xu
+    public RawCommentFragment createObject(){
+        return new RawCommentFragment();
     }
 }

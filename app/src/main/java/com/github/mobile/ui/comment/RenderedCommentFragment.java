@@ -114,4 +114,8 @@ public class RenderedCommentFragment extends DialogFragment implements
     @Override
     public void onLoaderReset(Loader<CharSequence> loader) {
     }
+    // add method by xu
+    public RenderedCommentFragment createObject(){
+        return new RenderedCommentFragment();
+    }
 }
