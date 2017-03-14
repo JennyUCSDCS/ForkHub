@@ -79,4 +79,5 @@ public class BaseActivity extends RoboActionBarActivity {
     protected String[] getStringArrayExtra(final String name) {
         return getIntent().getStringArrayExtra(name);
     }
+
 }

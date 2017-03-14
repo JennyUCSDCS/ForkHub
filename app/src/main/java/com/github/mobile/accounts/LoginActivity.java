@@ -64,6 +64,7 @@ import android.widget.TextView.OnEditorActionListener;
 
 import com.github.kevinsawicki.wishlist.ViewFinder;
 import com.github.mobile.R;
+import com.github.mobile.aspectj.DebugTrace;
 import com.github.mobile.persistence.AccountDataManager;
 import com.github.mobile.ui.LightProgressDialog;
 import com.github.mobile.ui.TextWatcherAdapter;

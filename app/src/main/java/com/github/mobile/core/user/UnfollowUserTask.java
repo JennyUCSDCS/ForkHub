@@ -20,6 +20,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.github.mobile.R;
+import com.github.mobile.aspectj.DebugTrace;
 import com.github.mobile.ui.ProgressDialogTask;
 import com.google.inject.Inject;
 
@@ -29,6 +30,7 @@ import org.eclipse.egit.github.core.service.UserService;
 /**
  * Task to unfollow a user
  */
+
 public class UnfollowUserTask extends ProgressDialogTask<User> {
 
     private static final String TAG = "UnfollowUserTask";
@@ -44,12 +46,12 @@ public class UnfollowUserTask extends ProgressDialogTask<User> {
      * @param context
      * @param login
      */
+
+
     public UnfollowUserTask(final Context context, final String login) {
         super(context);
-
         this.login = login;
     }
-
     /**
      * Execute the task with a progress dialog displaying.
      * <p>

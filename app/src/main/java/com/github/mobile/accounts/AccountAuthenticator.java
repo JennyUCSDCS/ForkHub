@@ -37,6 +37,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.github.mobile.DefaultClient;
+import com.github.mobile.aspectj.DebugTrace;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -150,6 +151,7 @@ class AccountAuthenticator extends AbstractAccountAuthenticator {
     public Bundle getAuthToken(final AccountAuthenticatorResponse response,
                                final Account account, final String authTokenType,
                                final Bundle options) throws NetworkErrorException {
+        //AspectJ
         Log.d(TAG, "Retrieving OAuth2 token");
 
         final Bundle bundle = new Bundle();

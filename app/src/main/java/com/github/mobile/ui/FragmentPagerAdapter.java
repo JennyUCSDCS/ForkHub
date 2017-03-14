@@ -43,6 +43,7 @@ public abstract class FragmentPagerAdapter extends
         return selected;
     }
 
+
     @Override
     public void setPrimaryItem(final ViewGroup container, final int position,
             final Object object) {
