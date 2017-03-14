@@ -58,6 +58,21 @@ public class EventListAdapter extends MultiTypeAdapter {
 
     private final boolean isCollaborator;
 
+    private EVENT_ASSIGNED assigned_event;
+    private EVENT_UNASSIGNED unassigned_event;
+    private EVENT_LABELED labeled_event;
+    private EVENT_UNLABELED unlabeled_event;
+    private EVENT_REFERENCED referenced_event;
+    private EVENT_CROSS_REFERENCED cross_referenced_event;
+    private EVENT_REVIEW_REQUESTED requested_review_event;
+    private EVENT_REVIEW_REQUEST_REMOVED removed_request_review_event;
+    private EVENT_MILESTONED milestoned_event;
+    private EVENT_DEMILESTONED demilestoned_event;
+    private EVENT_CLOSED closed_event;
+    private EVENT_RENAMED renamed_event;
+    private EVENT_MERGED merged_event;
+
+
 
     /**
      * Create list adapter
@@ -117,7 +132,7 @@ public class EventListAdapter extends MultiTypeAdapter {
             if (event.actor.id == event.assignee.id) {
                 assignedTextResource = R.string.issue_event_label_self_assigned;
             }
-            message += String.format(resources.getString(assignedTextResource), "<b>" + event.actor.login + "</b>");
+            message += assigned_event.Message(assignedTextResource, resources, event);
             setText(0, TypefaceUtils.ICON_PERSON);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
@@ -126,49 +141,48 @@ public class EventListAdapter extends MultiTypeAdapter {
             if (event.actor.id == event.assignee.id) {
                 unassignedTextResource = R.string.issue_event_label_self_unassigned;
             }
-            message += String.format(resources.getString(unassignedTextResource), "<b>" + event.actor.login + "</b>");
+            message += unassigned_event.Message(unassignedTextResource, resources, event);
             setText(0, TypefaceUtils.ICON_PERSON);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
         case TimelineEvent.EVENT_LABELED:
-            message += String.format(resources.getString(R.string.issue_event_label_added), "<b>" + event.label.name + "</b>");
+            message += labeled_event.Message(resources,event);
             setText(0, TypefaceUtils.ICON_TAG);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
         case TimelineEvent.EVENT_UNLABELED:
-            message += String.format(resources.getString(R.string.issue_event_label_removed), "<b>" + event.label.name + "</b>");
+            message += unlabeled_event.Message(resources,event);
             setText(0, TypefaceUtils.ICON_TAG);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
         case TimelineEvent.EVENT_REFERENCED:
-            message += String.format(resources.getString(R.string.issue_event_referenced), "<b>" + event.commit_id.substring(0,7) + "</b>");
+            message += referenced_event.Message(resources,event);
             setText(0, TypefaceUtils.ICON_BOOKMARK);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
         case TimelineEvent.EVENT_CROSS_REFERENCED:
             Issue issue = event.source.issue;
-            String crossRef = issue.repository.full_name + "#" + issue.number;
-            message += String.format(resources.getString(R.string.issue_event_cross_referenced), "<b>" + crossRef + "</b>");
+            message += cross_referenced_event.Message(issue, resources, event);
             setText(0, TypefaceUtils.ICON_BOOKMARK);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
         case TimelineEvent.EVENT_REVIEW_REQUESTED:
-            message += String.format(resources.getString(R.string.issue_event_review_requested), "<b>" + event.requested_reviewer.login + "</b>");
+            message += requested_review_event.Message(resources,event);
             setText(0, TypefaceUtils.ICON_EYE);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
         case TimelineEvent.EVENT_REVIEW_REQUEST_REMOVED:
-            message += String.format(resources.getString(R.string.issue_event_review_request_removed), "<b>" + event.requested_reviewer.login + "</b>");
+            message += removed_request_review_event.Message(resources,event);
             setText(0, TypefaceUtils.ICON_X);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
         case TimelineEvent.EVENT_MILESTONED:
-            message += String.format(resources.getString(R.string.issue_event_milestone_added), "<b>" + event.milestone.title + "</b>");
+            message += milestoned_event.Message(resources,event);
             setText(0, TypefaceUtils.ICON_MILESTONE);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
         case TimelineEvent.EVENT_DEMILESTONED:
-            message += String.format(resources.getString(R.string.issue_event_milestone_removed), "<b>" + event.milestone.title + "</b>");
+            message += demilestoned_event.Message(resources,event);
             setText(0, TypefaceUtils.ICON_MILESTONE);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
@@ -176,7 +190,7 @@ public class EventListAdapter extends MultiTypeAdapter {
             if (event.commit_id == null) {
                 message += resources.getString(R.string.issue_event_closed);
             } else {
-                message += String.format(resources.getString(R.string.issue_event_closed_from_commit), "<b>" + event.commit_id.substring(0,7) + "</b>");
+                message += closed_event.Message(resources,event);
             }
             setText(0, TypefaceUtils.ICON_CIRCLE_SLASH);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_red));
@@ -187,14 +201,12 @@ public class EventListAdapter extends MultiTypeAdapter {
             textView(0).setTextColor(resources.getColor(R.color.issue_event_green));
             break;
         case TimelineEvent.EVENT_RENAMED:
-            message += String.format(resources.getString(R.string.issue_event_rename),
-                    "<b>" + event.rename.from + "</b>",
-                    "<b>" + event.rename.to + "</b>");
+            message += renamed_event.Message(resources,event);
             setText(0, TypefaceUtils.ICON_PENCIL);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_normal));
             break;
         case TimelineEvent.EVENT_MERGED:
-            message += String.format(resources.getString(R.string.issue_event_merged), "<b>" + event.commit_id.substring(0,7) + "</b>");
+            message += merged_event.Message(resources,event);
             setText(0, TypefaceUtils.ICON_GIT_MERGE);
             textView(0).setTextColor(resources.getColor(R.color.issue_event_purple));
             break;
